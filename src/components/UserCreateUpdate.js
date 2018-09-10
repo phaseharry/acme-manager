@@ -11,12 +11,12 @@ class UserCreateUpdate extends React.Component {
   //     store.dispatch(handleInput(event.target.value));
   //   }
   render() {
-    const { users, handleChange, value } = this.props;
+    const { users, handleChange, handleSubmit, value } = this.props;
     return (
-      <form>
+      <form onSubmit={handleSubmit}>
         <label htmlFor="user">Name</label>
-        <input name="user" value={value} onChange={handleChange} />
-        <select name="manager">
+        <input type="text" name="user" value={value} onChange={handleChange} />
+        <select name="manager" onChange={handleChange}>
           <option>None</option>
           {users.map(function(user) {
             return <option key={user.id}>{user.name}</option>;

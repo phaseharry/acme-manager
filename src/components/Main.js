@@ -12,6 +12,7 @@ class Main extends React.Component {
     super();
     this.state = store.getState();
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
   componentDidMount() {
     this.unsubscribe = store.subscribe(() => this.setState(store.getState()));
@@ -26,7 +27,12 @@ class Main extends React.Component {
     this.unsubscribe();
   }
   handleChange(event) {
-    store.dispatch(handleInput(event.target.value));
+    store.dispatch(handleInput(event.target.name, event.target.value));
+  }
+  handleSubmit(event) {
+    event.preventDefault();
+    const { manager, user } = this.state;
+    console.log(manager, user);
   }
   render() {
     const { users, managers } = this.state;
@@ -44,6 +50,7 @@ class Main extends React.Component {
             <UserCreateUpdate
               users={users}
               handleChange={this.handleChange}
+              handleSubmit={this.handleSubmit}
               value={this.state.user}
             />
           )}
